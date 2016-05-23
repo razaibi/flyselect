@@ -6,7 +6,8 @@ Simple Lightweight JS plugin to make any HTML drop-down searchable (NO JQuery or
 ### Simple usage:
 
 Reference the two files (JS and CSS) this way:
-
+    <link rel="stylesheet" href="flyselect.min.css" type="text/css" />
+    <script type="text/javascript" src="flyselect.min.js"></script>
 
 Call via self-executing function:
 
