@@ -1,5 +1,5 @@
 #flyselect
-Simple Lightweight JS plugin to make any HTML drop-down searchable (with no dependencies)
+Simple Lightweight JS plugin to make any HTML drop-down searchable (NO JQuery or any other dependencies)
 
 
 
