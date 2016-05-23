@@ -3,7 +3,7 @@ Simple Lightweight JS plugin to make any HTML drop-down searchable (with no depe
 
 
 
-### H3 Simple usage:
+### Simple usage:
 
 Reference the two files (JS and CSS) this way:
 
