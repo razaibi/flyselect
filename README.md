@@ -1,5 +1,5 @@
 #flyselect
-Simple Lightweight JS plugin to make any HTML drop-down searchable (NO JQuery or any other dependencies)
+Simple, lightweight JS plugin to render any HTML select(drop down) into stylized, searchable element (NO JQuery or any other dependencies).
 
 
 
@@ -25,6 +25,7 @@ explicitly on page load:
 
     window.onload = function(){
         var i = new flyselect().init('SelCountry');
+        //repeat the same to use for a new HTML select
     }
     
 | Note |
