@@ -32,4 +32,6 @@ explicitly on page load:
 | ------|
 | Check sample.html file |
 
+<sup>Feel free to modify and use this project commercially and otherwise. Any constructive suggestions to improve are welcome.</sup>
 
+<sup>The art work files are based on the following font : Kasuki Hand by Alejandro Zapata (in case you use the images as a reference to this project)</sup>
