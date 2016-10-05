@@ -8,6 +8,7 @@
             width: 100%;
             background-color: #D4D4FF;
             padding: 10px;
+            box-sizing:border-box;
         }
 
         .flyselect_holder {
