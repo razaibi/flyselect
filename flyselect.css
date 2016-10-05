@@ -1,4 +1,4 @@
-﻿        body {
+        body {
             font-family: Arial;
         }
 
@@ -29,6 +29,13 @@
             border-bottom: 1px solid #ccc;
             cursor: pointer;
             cursor: hand;
+        }
+
+        .flyselect_no_res {
+            padding: 5px;
+            color:#ccc;
+            font-style:italic;
+            font-size:12px;
         }
 
         @-moz-document url-prefix(http://),url-prefix(https://) {
