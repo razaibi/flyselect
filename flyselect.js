@@ -19,6 +19,17 @@ flyselect.prototype = function () {
             _set_style(el, 'display', 'none');
         },
         _filtered_val = [],
+        _selectedText = '',
+        _selectedValue = '',
+        _set_item_by_value = function(el, selectedValue){
+            _f(el).value = selectedValue;
+            var childOptions = _f('flyselect_list_' + el).getElementsByTagName("*");
+            for (var c = 0; c <= childOptions.length - 1; c++){
+                if (childOptions[c].getAttribute('data-val') == selectedValue){
+                    childOptions[c].click();
+                }
+            }
+        },
         _render_select = function (el) {
             var sel = _f(el);
             var _seltexts = [];
@@ -32,9 +43,10 @@ flyselect.prototype = function () {
             holderelem.className = 'flyselect_holder';
             var filter_elem = document.createElement('INPUT');
             filter_elem.className = 'form_text';
-            filter_elem.placeholder = "Select Category";
+            filter_elem.placeholder = "Select One";
             var list_elem = document.createElement('UL');
             list_elem.className = 'flyselect_list';
+            list_elem.id = 'flyselect_list_' + el;
             for (var q = 0; q <= _selvals.length - 1; q++) {
                 var option_elem = _build_option(_seltexts[q], _selvals[q]);
                 list_elem.appendChild(option_elem);
@@ -42,6 +54,7 @@ flyselect.prototype = function () {
                     filter_elem.value = this.innerHTML;
                     sel.value = this.getAttribute('data-val');
                     list_elem.style.display = 'none';
+                    _selectedValue = sel.value;
                 })
             }
             holderelem.appendChild(filter_elem);
@@ -62,9 +75,11 @@ flyselect.prototype = function () {
                 var query = this.value;
                 list_elem.innerHTML = '';
                 if (query != '') {
-                    for (var q = 0; q <= _selvals.length - 1; q++) {
-                        //if (_selvals[q].substr(0, query.length).toUpperCase() == query.toUpperCase()) {
-                        if (_selvals[q].toUpperCase().indexOf(query.toUpperCase()) >= 0) {
+                    for (var q = 0; q <= _seltexts.length - 1; q++) {
+                        if (_seltexts[q].toUpperCase().includes(query.toUpperCase())
+                            || _selvals[q].toUpperCase().includes(query.toUpperCase())
+                        )
+                        {
                             _filtered_val.push(q);
                         }
                     }
@@ -75,6 +90,7 @@ flyselect.prototype = function () {
                             filter_elem.value = this.innerHTML;
                             sel.value = this.getAttribute('data-val');
                             list_elem.style.display = 'none';
+                            _selectedValue = sel.value;
                         })
                         list_elem.appendChild(option_elem);
                     }
@@ -89,9 +105,30 @@ flyselect.prototype = function () {
                             filter_elem.value = this.innerHTML;
                             sel.value = this.getAttribute('data-val');
                             list_elem.style.display = 'none';
+                            _selectedValue = sel.value;
                         })
                     }
                 }
+            })
+            filter_elem.addEventListener("blur", function () {
+                setTimeout(function(){
+                    if (_selectedValue == '' || this.value == ''){
+                        list_elem.style.display = 'none';
+                        this.value = '';
+                    }
+                    var _picked_match = false;
+                    for (var q = 0; q <= _seltexts.length - 1; q++){
+                        if (_seltexts[q].toUpperCase() == filter_elem.value.toUpperCase()
+                        || _selvals[q].toUpperCase() == filter_elem.value.toUpperCase()
+                        ){
+                            _picked_match = true;
+                        }
+                    }
+                    if (!_picked_match){
+                        list_elem.style.display = 'none';
+                        filter_elem.value = '';
+                    }
+                }, 500);
             })
             sel.parentElement.appendChild(holderelem);
         },
@@ -106,6 +143,7 @@ flyselect.prototype = function () {
             _render_select(el);
         };
     return {
-        init: _init
+        init: _init,
+        setByValue: _set_item_by_value
     }
 }();
